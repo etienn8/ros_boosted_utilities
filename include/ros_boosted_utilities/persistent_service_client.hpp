@@ -21,6 +21,15 @@ class PersistentServiceClient
         PersistentServiceClient() = default;
 
         /**
+         * @brief Creates a persistent service client that connects to the service with the given name in the current namespace of the node.
+         * @param service_name The name of the service that the client is going to connect to.
+        */
+        PersistentServiceClient(const std::string& service_name)
+        {
+            client_ = nh_.serviceClient<TServiceType>(service_name, true);
+        }
+
+        /**
          * @brief Creates a persistent service client that connects to the service with the given name from the given node handle.
          * @param nh The node handle that the service client is going to be created from and that will be used for the reconnexion.
          * @param service_name The name of the service that the client is going to connect to.
